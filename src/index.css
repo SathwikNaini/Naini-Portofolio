@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-primary: #3b82f6;
+  --color-primary-dark: #2563eb;
+
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --perspective-1000: 1000px;
+
+  --dark-mode: selector;
+}
+
+:root {
+  --background: #ffffff;
+  --bg-gradient: #ffffff;
+  --foreground: #334155;
+  --heading: #0f172a;
+  --border: #e2e8f0;
+  --card: #ffffff;
+  --muted: #64748b;
+  --accent: #2563eb;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(226, 232, 240, 0.5);
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  --background: #000000;
+  --bg-gradient: #000000;
+  --foreground: #94a3b8;
+  --heading: #f8fafc;
+  --border: rgba(255, 255, 255, 0.08);
+  --card: #050505;
+  --muted: #64748b;
+  --accent: #3b82f6;
+  --glass-bg: rgba(0, 0, 0, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 12px 40px -4px rgba(0, 0, 0, 0.8);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg-gradient);
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    transition: background 0.5s ease, background-color 0.5s ease, color 0.3s ease;
+    @apply selection:bg-primary/30 selection:text-primary dark:selection:text-white overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--heading);
+    font-family: var(--font-display);
+    transition: color 0.3s ease;
+  }
+}
+
+.bg-decor {
+  @apply fixed inset-0 pointer-events-none z-[-1] overflow-hidden;
+  background: var(--bg-gradient);
+  background-color: var(--background);
+  transition: background 0.5s ease, background-color 0.5s ease;
+}
+
+.bg-decor::before {
+  content: '';
+  @apply absolute inset-0;
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.1;
+}
+
+.dark .bg-decor::before {
+  opacity: 0.05;
+  background-size: 80px 80px;
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-decor .orb {
+  @apply absolute rounded-full blur-[120px] transition-all duration-700;
+  opacity: 0.05;
+}
+
+.dark .bg-decor .orb {
+  opacity: 0.15;
+}
+
+.stylized-name {
+  @apply text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-6 leading-[1] transition-all duration-500;
+  color: var(--heading);
+}
+
+.dark .stylized-name {
+  background: linear-gradient(to right, #60a5fa, #93c5fd);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.3));
+}
+
+.glass-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  @apply backdrop-blur-xl rounded-2xl transition-all duration-300;
+}
+
+.glass-card:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.dark .glass-card:hover {
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.section-padding {
+  @apply py-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto;
+}
+
+.nav-link {
+  @apply text-sm font-medium transition-all duration-200 relative px-2 py-1;
+  color: var(--muted);
+}
+
+.nav-link:hover {
+  color: var(--heading);
+}
+
+.nav-link.active {
+  color: var(--accent);
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-primary rounded-full transition-all duration-300;
+}
+
+.nav-link.active::after {
+  @apply w-full;
+}
+
+.btn-primary {
+  @apply px-8 py-3.5 font-semibold rounded-full transition-all duration-300 active:scale-95 flex items-center justify-center gap-2;
+  background-color: var(--heading);
+  color: var(--background);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.dark .btn-primary {
+  @apply bg-primary hover:bg-primary-dark;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2);
+}
+
+.btn-secondary {
+  @apply px-8 py-3.5 bg-transparent font-semibold rounded-full transition-all duration-300 border active:scale-95 flex items-center justify-center gap-2;
+  border-color: var(--border);
+  color: var(--heading);
+}
+
+.btn-secondary:hover {
+  @apply bg-zinc-50 dark:bg-white/5;
+  border-color: var(--primary);
+}
+
+.icon-btn {
+  @apply p-3 rounded-full transition-all duration-300 border relative active:scale-90 flex items-center justify-center;
+  border-color: var(--border);
+  background-color: var(--card);
+  color: var(--muted);
+}
+
+.icon-btn:hover {
+  @apply text-primary;
+  border-color: var(--primary);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+}
+
+.tooltip {
+  @apply absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-zinc-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20;
+}
+
+.skill-badge {
+  @apply px-4 py-2 border rounded-xl text-sm font-bold flex items-center gap-2 transition-all duration-300;
+  background-color: var(--card);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+.dark .skill-badge {
+  background-color: var(--card);
+  border-color: var(--border);
+  color: #f1f5f9;
+}
+
+.skill-badge:hover {
+  @apply shadow-lg scale-105;
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+.dark .skill-badge:hover {
+  @apply shadow-sm scale-100;
+  color: var(--heading);
+  background-color: var(--card);
+}
+
+.typing-cursor {
+  @apply inline-block w-0.5 h-[1em] bg-primary ml-1 align-middle animate-pulse;
+}
+
+.form-input {
+  @apply w-full px-4 py-3 rounded-xl outline-none transition-all duration-300 border;
+  background-color: var(--card);
+  border-color: var(--border);
+  color: var(--heading);
+}
+
+.form-input:focus {
+  @apply ring-2 ring-primary/20;
+  border-color: var(--primary);
+}
+
+.glass-premium {
+  @apply backdrop-blur-md transition-all duration-500 rounded-3xl;
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--card-shadow);
+}
+
+.ease-premium {
+  transition-timing-function: var(--ease-premium);
+}
+
+.dashboard-glow {
+  @apply absolute pointer-events-none z-0 transition-opacity duration-300;
+  background: radial-gradient(circle at var(--x) var(--y), rgba(59, 130, 246, 0.15) 0%, transparent 50%);
+}
+
+.dark .dashboard-glow {
+  background: radial-gradient(circle at var(--x) var(--y), rgba(59, 130, 246, 0.25) 0%, transparent 60%);
+}
+
+.connecting-line {
+  @apply fill-none stroke-[2] opacity-20 dark:opacity-30;
+  stroke: var(--primary);
+  stroke-dasharray: 4 4;
+  animation: line-flow 10s linear infinite;
+}
+
+@keyframes line-flow {
+  from {
+    stroke-dashoffset: 80;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.magnetic-badge {
+  @apply px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 cursor-default select-none;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  color: var(--heading);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.dark .magnetic-badge {
+  background-color: rgba(15, 23, 42, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #f1f5f9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.magnetic-badge:hover {
+  @apply border-primary/50 text-primary;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+
+.skill-cluster-container {
+  @apply relative p-8 flex flex-col items-center justify-center transition-all duration-700;
+}
+
+.cluster-icon-wrapper {
+  @apply w-16 h-16 rounded-2xl flex items-center justify-center mb-6 relative;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
+}
+
+.dark .cluster-icon-wrapper {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent);
+}
+
+@config "../tailwind.config.js";
+
+.floating-blob {
+  @apply absolute rounded-full blur-[100px] opacity-20 dark:opacity-10 pointer-events-none mix-blend-multiply dark:mix-blend-screen animate-float;
+}
