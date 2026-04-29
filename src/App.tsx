@@ -53,24 +53,24 @@ const PROJECTS: Project[] = [
     demo: "https://expense-tracker-xi-weld.vercel.app/",
     image: "https://picsum.photos/seed/nova/1200/800"
   },
-  {
-    id: 3,
-    title: "Aura Social",
-    description: "A privacy-focused social platform with end-to-end encrypted messaging, decentralized storage, and a clean, minimalist user interface.",
-    tech: ["React", "Node.js", "Socket.io", "WebRTC", "MongoDB"],
-    github: "https://github.com",
-    demo: "https://example.com",
-    image: "https://picsum.photos/seed/aura/1200/800"
-  },
-  {
-    id: 4,
-    title: "Zenith Analytics",
-    description: "Enterprise-grade data visualization dashboard that processes real-time telemetry data from IoT devices with sub-second latency.",
-    tech: ["React", "D3.js", "Go", "Redis", "PostgreSQL"],
-    github: "https://github.com",
-    demo: "https://example.com",
-    image: "https://picsum.photos/seed/zenith/1200/800"
-  },
+  // {
+  //   id: 3,
+  //   title: "Aura Social",
+  //   description: "A privacy-focused social platform with end-to-end encrypted messaging, decentralized storage, and a clean, minimalist user interface.",
+  //   tech: ["React", "Node.js", "Socket.io", "WebRTC", "MongoDB"],
+  //   github: "https://github.com",
+  //   demo: "https://example.com",
+  //   image: "https://picsum.photos/seed/aura/1200/800"
+  // },
+  // {
+  //   id: 4,
+  //   title: "Zenith Analytics",
+  //   description: "Enterprise-grade data visualization dashboard that processes real-time telemetry data from IoT devices with sub-second latency.",
+  //   tech: ["React", "D3.js", "Go", "Redis", "PostgreSQL"],
+  //   github: "https://github.com",
+  //   demo: "https://example.com",
+  //   image: "https://picsum.photos/seed/zenith/1200/800"
+  // },
   // {
   //   id: 5,
   //   title: "Lumina Studio",
